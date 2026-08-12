@@ -1,6 +1,7 @@
 .header {
     height: 70px;
-    background-color: #ff6600;
+    /*background-color: #ff6600;*/
+    background-color: #808080;
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -11,6 +12,14 @@
 
 .header-left {
     width: 120px;
+    display: flex;
+    align-items: center;
+}
+
+.header-left img {
+    height: 45px;
+    width: auto;
+    object-fit: contain;
 }
 
 .header-title {
@@ -20,7 +29,7 @@
 
 .logout-btn {
     background-color: white;
-    color: #ff6600;
+    color: #000000;
     border: none;
     padding: 10px 18px;
     border-radius: 8px;

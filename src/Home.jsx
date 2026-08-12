@@ -1,11 +1,14 @@
 import "./Home.css";
+import logo from "./assets/acs.png";
 
 function Home({ setGoHome }) {
   return (
     <div>
       <header className="header">
 
-        <div className="header-left"></div>
+        <div className="header-left">
+          <img src={logo} alt="Logo" />
+        </div>
 
         <div className="header-title">
           Hoş Geldiniz

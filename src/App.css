@@ -39,9 +39,10 @@ body{
   cursor:pointer;
   font-size:16px;
 }
-
+/*giriş yap/üye ol butonları*/
 .tabs .active{
-  background:#ff6600;
+  /*background:#ff6600;*/
+  background:#0099FF;
   color:white;
 }
 
@@ -68,14 +69,16 @@ input{
 
 .options a{
   text-decoration:none;
-  color:#ff6600;
+  /*color:#ff6600;*/
+  color:#000000;
 }
 
 .login-btn{
   width:100%;
   padding:15px;
   border:none;
-  background:#ff6600;
+  /*background:#ff6600;*/
+  background:#0099FF;
   color:white;
   border-radius:8px;
   cursor:pointer;
@@ -83,7 +86,7 @@ input{
 }
 
 .login-btn:hover{
-  background:#e45700;
+  background:#1F91DC;
 }
 
 .password-box{
@@ -103,7 +106,7 @@ input{
     transform:translateY(-50%);
     border:none;
     background:none;
-    color:#ff6600;
+    color:#0099FF;
     cursor:pointer;
     font-size:14px;
     font-weight:bold;
