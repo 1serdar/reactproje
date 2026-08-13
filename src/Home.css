@@ -53,3 +53,37 @@
 .main-content h2 {
     color: #666;
 }
+
+.products-section {
+    margin-top: 40px;
+    padding: 20px 40px;
+    text-align: left;
+}
+
+.product-card {
+    width: 250px;
+    cursor: pointer;
+}
+
+.product-image {
+    width: 250px;
+    height: 250px;
+    object-fit: contain;
+    display: block;
+    margin-bottom: -45px;
+}
+
+.product-card h3 {
+    margin-top: 8px;
+    margin-bottom: 4px;
+    font-size: 17px;
+    font-weight: bold;
+    color: #000000;
+}
+
+.product-price {
+    margin-top: -5px;
+    font-size: 16px;
+    font-weight: bold;
+    color: #000000;
+}

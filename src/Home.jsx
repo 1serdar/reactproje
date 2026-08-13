@@ -23,6 +23,12 @@ function Home({ setGoHome }) {
 
       </header>
 
+      <main className="products-section">
+
+        
+
+      </main>
+
     </div>
   );
 }
