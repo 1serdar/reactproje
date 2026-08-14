@@ -1,7 +1,8 @@
 import "./Home.css";
 import logo from "./assets/acs.png";
+import products from "./mockData";
 
-function Home({ setGoHome }) {
+function Home({ setGoHome, setSelectedProduct }) {
   return (
     <div>
       <header className="header">
@@ -24,9 +25,17 @@ function Home({ setGoHome }) {
       </header>
 
       <main className="products-section">
+        {products.map((product) => (
+          <div className="product-card" key={product.id} onClick={() => setSelectedProduct(product)}>
+            <img className="product-image"
+              src={product.image}
+              alt={product.name} />
 
-        
+            <h3>{product.name}</h3>
 
+            <p className="product-price">{product.price} TL</p>
+          </div>
+        ))}
       </main>
 
     </div>

@@ -1,6 +1,7 @@
 import "./App.css";
 import { useEffect, useState } from "react";
 import Home from "./Home";
+import ProductDetail from "./ProductDetail";
 
 function App() {
   const [activeTab, setActiveTab] = useState("login");
@@ -25,6 +26,8 @@ useEffect(() => {
 
   const staticEmail = "test@test.com";
   const staticPassword = "123456";
+
+  const [selectedProduct, setSelectedProduct] = useState(null);
 
   const handleLogin = () => {
     if (email === staticEmail && password === staticPassword) {
@@ -71,9 +74,27 @@ useEffect(() => {
     setShowPassword(false);
   };
 
+const handleBackHome = () => {
+  setSelectedProduct(null);
+};
+
   if (goHome) {
-    return <Home setGoHome={handleLogout} />;
+  if (selectedProduct) {
+    return (
+  <ProductDetail
+    product={selectedProduct}
+    onBackHome={handleBackHome}
+  />
+);
   }
+
+  return (
+    <Home
+      setGoHome={handleLogout}
+      setSelectedProduct={setSelectedProduct}
+    />
+  );
+}
 
   return (
     <div className="container">
