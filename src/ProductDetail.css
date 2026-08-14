@@ -1,0 +1,49 @@
+.detail-header {
+    height: 70px;
+    background-color: #808080;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 30px;
+    color: white;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+}
+
+.detail-header-left {
+    width: 120px;
+    display: flex;
+    align-items: center;
+}
+
+.detail-header-left img {
+    height: 45px;
+    width: auto;
+    object-fit: contain;
+}
+
+.detail-header-title {
+    font-size: 22px;
+    font-weight: bold;
+}
+
+.detail-header-buttons {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.home-btn,
+.logout-btn {
+    background-color: white;
+    color: #000000;
+    border: none;
+    padding: 10px 18px;
+    border-radius: 8px;
+    cursor: pointer;
+    font-weight: bold;
+}
+
+.home-btn:hover,
+.logout-btn:hover {
+    background-color: #f1f1f1;
+}
