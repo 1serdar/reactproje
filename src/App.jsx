@@ -72,6 +72,7 @@ useEffect(() => {
     setGoHome(false);
     setActiveTab("login");
     setShowPassword(false);
+    setSelectedProduct(null);
   };
 
 const handleBackHome = () => {
@@ -84,6 +85,7 @@ const handleBackHome = () => {
   <ProductDetail
     product={selectedProduct}
     onBackHome={handleBackHome}
+    onLogout={handleLogout}
   />
 );
   }
