@@ -47,3 +47,34 @@
 .logout-btn:hover {
     background-color: #f1f1f1;
 }
+
+.product-detail {
+    display: flex;
+    align-items: center;
+    gap: 80px;
+    padding: 50px 80px;
+}
+
+.product-detail-image {
+    width: 50%;
+    display: flex;
+    justify-content: center;
+}
+
+.product-detail-image img {
+    width: 500px;
+    height: 500px;
+    object-fit: contain;
+}
+
+.product-detail-info {
+    width: 40%;
+}
+
+.product-detail-info h1 {
+    font-size: 28px;
+    font-weight: bold;
+    color: #000000;
+    text-align: left;
+    margin: 0 0 5px 0;
+}
