@@ -131,3 +131,32 @@ input{
   color: #dc3545;
   background-color: #fdebec;
 }
+
+@media (max-width: 500px) {
+  .container {
+    padding: 20px;
+  }
+
+  .login-box {
+    width: 100%;
+    padding: 25px;
+  }
+
+  .tabs button {
+    font-size: 14px;
+    padding: 12px;
+  }
+
+  h2 {
+    font-size: 22px;
+  }
+
+  input {
+    padding: 12px;
+  }
+
+  .login-btn {
+    padding: 13px;
+    font-size: 16px;
+  }
+}

@@ -1,8 +1,10 @@
 import "./Home.css";
 import logo from "./assets/acs.png";
 import products from "./mockData";
+import { useNavigate } from "react-router-dom";
 
-function Home({ setGoHome, setSelectedProduct }) {
+function Home({ setSelectedProduct, onLogout }) {
+  const navigate = useNavigate();
   return (
     <div>
       <header className="header">
@@ -17,7 +19,7 @@ function Home({ setGoHome, setSelectedProduct }) {
 
         <button
           className="logout-btn"
-          onClick={() => setGoHome(false)}
+          onClick={onLogout}
         >
           Çıkış Yap
         </button>
@@ -26,7 +28,14 @@ function Home({ setGoHome, setSelectedProduct }) {
 
       <main className="products-section">
         {products.map((product) => (
-          <div className="product-card" key={product.id} onClick={() => setSelectedProduct(product)}>
+          <div
+            className="product-card"
+            key={product.id}
+            onClick={() => {
+              setSelectedProduct(product);
+              navigate("/productdetail");
+            }}
+          >
             <img className="product-image"
               src={product.image}
               alt={product.name} />

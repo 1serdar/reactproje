@@ -1,7 +1,9 @@
 import "./ProductDetail.css";
 import logo from "./assets/acs.png";
+import { useNavigate } from "react-router-dom";
 
-function ProductDetail({ product, onBackHome, onLogout }) {
+function ProductDetail({ product, onLogout }) {
+    const navigate = useNavigate();
     return (
         <div>
             <header className="detail-header">
@@ -11,13 +13,13 @@ function ProductDetail({ product, onBackHome, onLogout }) {
                 </div>
 
                 <div className="detail-header-title">
-                    Hoş Geldiniz
+                    Ürün Detayı
                 </div>
 
                 <div className="detail-header-buttons">
                     <button
                         className="home-btn"
-                        onClick={onBackHome}
+                        onClick={() => navigate("/homepage")}
                     >
                         Ana Sayfa
                     </button>
