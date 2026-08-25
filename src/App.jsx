@@ -1,8 +1,9 @@
 import "./App.css";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import Home from "./Home";
 import ProductDetail from "./ProductDetail";
 import { Routes, Route, Navigate, useNavigate } from "react-router-dom";
+import ProtectedRoute from "./ProtectedRoute";
 
 function App() {
   const navigate = useNavigate();
@@ -76,6 +77,7 @@ function App() {
     setShowPassword(false);
     setSelectedProduct(null);
     setIsLoggedIn(false);
+    document.title = "ACS";
     navigate("/login", { replace: true });
   };
 
@@ -195,28 +197,28 @@ function App() {
       <Route
         path="/homepage"
         element={
-          isLoggedIn ? (
+          <ProtectedRoute isLoggedIn={isLoggedIn}>
             <Home
               setSelectedProduct={setSelectedProduct}
               onLogout={handleLogout}
             />
-          ) : (
-            <Navigate to="/login" replace />
-          )
+          </ProtectedRoute>
         }
       />
 
       <Route
         path="/productdetail"
         element={
-          isLoggedIn && selectedProduct ? (
-            <ProductDetail
-              product={selectedProduct}
-              onLogout={handleLogout}
-            />
-          ) : (
-            <Navigate to="/login" replace />
-          )
+          <ProtectedRoute isLoggedIn={isLoggedIn}>
+            {selectedProduct ? (
+              <ProductDetail
+                product={selectedProduct}
+                onLogout={handleLogout}
+              />
+            ) : (
+              <Navigate to="/homepage" replace />
+            )}
+          </ProtectedRoute>
         }
       />
       <Route
