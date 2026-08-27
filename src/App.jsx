@@ -207,17 +207,10 @@ function App() {
       />
 
       <Route
-        path="/productdetail"
+        path="/productdetail/:id"
         element={
           <ProtectedRoute isLoggedIn={isLoggedIn}>
-            {selectedProduct ? (
-              <ProductDetail
-                product={selectedProduct}
-                onLogout={handleLogout}
-              />
-            ) : (
-              <Navigate to="/homepage" replace />
-            )}
+            <ProductDetail onLogout={handleLogout} />
           </ProtectedRoute>
         }
       />

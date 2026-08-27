@@ -37,7 +37,7 @@ function Home({ setSelectedProduct, onLogout }) {
             key={product.id}
             onClick={() => {
               setSelectedProduct(product);
-              navigate("/productdetail");
+              navigate(`/productdetail/${product.id}`);
             }}
           >
             <img className="product-image"

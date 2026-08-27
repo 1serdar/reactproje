@@ -1,13 +1,18 @@
 import "./ProductDetail.css";
 import logo from "./assets/acs.png";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { useEffect } from "react";
+import products from "./mockData";
 
 function ProductDetail({ product, onLogout }) {
     useEffect(() => {
         document.title = "ACS - Ürün Detayı";
     }, []);
     const navigate = useNavigate();
+    const { id } = useParams();
+    const selectedProduct = products.find(
+        (product) => product.id === Number(id)
+    );
     return (
         <div>
             <header className="detail-header">
@@ -40,12 +45,12 @@ function ProductDetail({ product, onLogout }) {
 
             <div className="product-detail">
                 <div className="product-detail-image">
-                    <img src={product.image} alt={product.name} />
+                    <img src={selectedProduct.image} alt={selectedProduct.name} />
                 </div>
 
                 <div className="product-detail-info">
-                    <h1>{product.name}</h1>
-                    <h1>{product.price} TL</h1>
+                    <h1>{selectedProduct.name}</h1>
+                    <h1>{selectedProduct.price} TL</h1>
                 </div>
             </div>
 
