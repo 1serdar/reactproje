@@ -21,9 +21,9 @@ function ProductDetail({ product, onLogout }) {
                     <img src={logo} alt="Logo" />
                 </div>
 
-                <div className="detail-header-title">
+                <h1 className="detail-header-title">
                     Ürün Detayı
-                </div>
+                </h1>
 
                 <div className="detail-header-buttons">
                     <button
@@ -43,16 +43,16 @@ function ProductDetail({ product, onLogout }) {
 
             </header>
 
-            <div className="product-detail">
-                <div className="product-detail-image">
+            <main className="product-detail">
+                <figure className="product-detail-image">
                     <img src={selectedProduct.image} alt={selectedProduct.name} />
-                </div>
+                </figure>
 
-                <div className="product-detail-info">
+                <section className="product-detail-info">
                     <h1>{selectedProduct.name}</h1>
                     <h1>{selectedProduct.price} TL</h1>
-                </div>
-            </div>
+                </section>
+            </main>
 
         </div>
     );

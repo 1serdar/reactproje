@@ -25,6 +25,8 @@
 .header-title {
     font-size: 22px;
     font-weight: bold;
+    color: white;
+    letter-spacing: normal;
 }
 
 .logout-btn {

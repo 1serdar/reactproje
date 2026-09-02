@@ -17,9 +17,9 @@ function Home({ setSelectedProduct, onLogout }) {
           <img src={logo} alt="Logo" />
         </div>
 
-        <div className="header-title">
+        <h1 className="header-title">
           Hoş Geldiniz
-        </div>
+        </h1>
 
         <button
           className="logout-btn"
@@ -30,25 +30,27 @@ function Home({ setSelectedProduct, onLogout }) {
 
       </header>
 
-      <main className="products-section">
-        {products.map((product) => (
-          <div
-            className="product-card"
-            key={product.id}
-            onClick={() => {
-              setSelectedProduct(product);
-              navigate(`/productdetail/${product.id}`);
-            }}
-          >
-            <img className="product-image"
-              src={product.image}
-              alt={product.name} />
+      <main>
+        <section className="products-section">
+          {products.map((product) => (
+            <article
+              className="product-card"
+              key={product.id}
+              onClick={() => {
+                setSelectedProduct(product);
+                navigate(`/productdetail/${product.id}`);
+              }}
+            >
+              <img className="product-image"
+                src={product.image}
+                alt={product.name} />
 
-            <h3>{product.name}</h3>
+              <h3>{product.name}</h3>
 
-            <p className="product-price">{product.price} TL</p>
-          </div>
-        ))}
+              <p className="product-price">{product.price} TL</p>
+            </article>
+          ))}
+        </section>
       </main>
 
     </div>

@@ -191,6 +191,11 @@ function App() {
                 )}
 
               </div>
+
+              <footer className="login-footer">
+                © {new Date().getFullYear()} ACS - Tüm Hakları Saklıdır.
+              </footer>
+
             </div>
           )}
       />
