@@ -1,11 +1,24 @@
 import "./App.css";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Home from "./Home";
 import ProductDetail from "./ProductDetail";
 import { Routes, Route, Navigate, useNavigate } from "react-router-dom";
 import ProtectedRoute from "./ProtectedRoute";
 
 function App() {
+  useEffect(() => {
+    if (window.location.pathname === "/reactproje/") {
+      document.title = "ACS - Giriş";
+
+      const description = document.querySelector('meta[name="description"]');
+      if (description) {
+        description.setAttribute(
+          "content",
+          "ACS - Ayakkabı e-ticaret sitesine giriş yapın."
+        );
+      }
+    }
+  }, []);
   const navigate = useNavigate();
   const [activeTab, setActiveTab] = useState("login");
   const [showPassword, setShowPassword] = useState(false);
@@ -29,7 +42,6 @@ function App() {
   const staticEmail = "test@test.com";
   const staticPassword = "123456";
 
-  const [selectedProduct, setSelectedProduct] = useState(null);
   const [isLoggedIn, setIsLoggedIn] = useState(false);
 
   const handleLogin = () => {
@@ -75,16 +87,15 @@ function App() {
     setMessageType("");
     setActiveTab("login");
     setShowPassword(false);
-    setSelectedProduct(null);
     setIsLoggedIn(false);
     document.title = "ACS";
-    navigate("/login", { replace: true });
+    navigate("/", { replace: true });
   };
 
   return (
     <Routes>
       <Route
-        path="/login"
+        path="/"
         element={
           isLoggedIn ? (
             <Navigate to="/homepage" replace />
@@ -193,7 +204,7 @@ function App() {
               </div>
 
               <footer className="login-footer">
-                © {new Date().getFullYear()} ACS - Tüm Hakları Saklıdır.
+                © 2026 ACS - Tüm Hakları Saklıdır.
               </footer>
 
             </div>
@@ -204,7 +215,6 @@ function App() {
         element={
           <ProtectedRoute isLoggedIn={isLoggedIn}>
             <Home
-              setSelectedProduct={setSelectedProduct}
               onLogout={handleLogout}
             />
           </ProtectedRoute>
@@ -219,10 +229,7 @@ function App() {
           </ProtectedRoute>
         }
       />
-      <Route
-        path="/"
-        element={<Navigate to="/login" replace />}
-      />
+
     </Routes>
   );
 }

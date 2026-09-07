@@ -57,7 +57,7 @@
 }
 
 .products-section {
-    margin-top: 40px;
+     margin-top: -15px;
     padding: 20px 40px;
     display: grid;
     grid-template-columns: repeat(4, minmax(200px, 1fr));
@@ -73,6 +73,7 @@
     padding: 15px;
     box-sizing: border-box;
     overflow: hidden;
+    position: relative;
 }
 
 .product-image {
@@ -89,14 +90,45 @@
     font-weight: bold;
     color: #000000;
     text-align: left;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
 }
 
 .product-price {
-    margin: 0;
+    margin: 5px 0 0 0;
     font-size: 16px;
     font-weight: bold;
     color: #000000;
     text-align: left;
+    white-space: nowrap;
+}
+
+.no-products-found {
+    padding-left: 15px;
+}
+
+main > label {
+    display: block;
+    margin-top: 10px;
+    margin-left: 15px;
+    margin-bottom: 5px;
+}
+
+.like-btn {
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    width: 32px;
+    height: 32px;
+    border: none;
+    background: white;
+    border-radius: 50%;
+    font-size: 22px;
+    line-height: 32px;
+    padding: 0;
+    cursor: pointer;
+    color: red;
 }
 
 @media (max-width: 500px) {
@@ -136,14 +168,4 @@
         grid-template-columns: 1fr;
         padding: 20px;
     }
-}
-
-.product-card h3 {
-    overflow: hidden;
-    text-overflow: ellipsis;
-    white-space: nowrap;
-}
-
-.product-price {
-    white-space: nowrap;
 }

@@ -60,19 +60,6 @@ input{
   font-size:15px;
 }
 
-.options{
-  display:flex;
-  justify-content:space-between;
-  margin-bottom:25px;
-  font-size:14px;
-}
-
-.options a{
-  text-decoration:none;
-  /*color:#ff6600;*/
-  color:#000000;
-}
-
 .login-btn{
   width:100%;
   padding:15px;
