@@ -89,7 +89,7 @@ function App() {
 
     const passwordRegex = /^(?=.*[!@#$%^&*()_+\-=\[\]{};':"\\|,.<>/?]).{4,}$/;
     if (!passwordRegex.test(registerPassword)) {
-      setMessage("Şifre en az 4 karakter, 1 özel karakter içermeli!");
+      setMessage("Şifre en az 4 karakter ve özel karakter içermeli!");
       setMessageType("error");
       return;
     }
