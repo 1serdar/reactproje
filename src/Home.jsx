@@ -4,7 +4,7 @@ import products from "./mockData";
 import { useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
 
-function Home({ onLogout }) {
+function Home({ onLogout, currentUser }) {
   useEffect(() => {
     document.title = "ACS - Ana Sayfa";
 
@@ -18,18 +18,38 @@ function Home({ onLogout }) {
   }, []);
   const navigate = useNavigate();
   const [searchTerm, setSearchTerm] = useState("");
-  const [likedProducts, setLikedProducts] = useState(() => {
-  const savedLikes = localStorage.getItem("likedProducts");
-  return savedLikes ? JSON.parse(savedLikes) : [];
-});
+  const [filter, setFilter] = useState("Tüm Ürünler");
 
-useEffect(() => {
-  localStorage.setItem("likedProducts", JSON.stringify(likedProducts));
-}, [likedProducts]);
-  const filteredProducts = products.filter((product) =>
-    product.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
-    product.id.toString().includes(searchTerm)
-  );
+  // Kullanıcıya özel favori ve sepet
+  const [likedProducts, setLikedProducts] = useState(() => {
+    const savedLikes = localStorage.getItem(`likedProducts_${currentUser}`);
+    return savedLikes ? JSON.parse(savedLikes) : [];
+  });
+  const [cartProducts, setCartProducts] = useState(() => {
+    const savedCart = localStorage.getItem(`cartProducts_${currentUser}`);
+    return savedCart ? JSON.parse(savedCart) : [];
+  });
+
+  useEffect(() => {
+    localStorage.setItem(`likedProducts_${currentUser}`, JSON.stringify(likedProducts));
+  }, [likedProducts, currentUser]);
+  useEffect(() => {
+    localStorage.setItem(`cartProducts_${currentUser}`, JSON.stringify(cartProducts));
+  }, [cartProducts, currentUser]);
+
+  // Arama ve ürün filtreleme
+  const filteredProducts = products.filter((product) => {
+    const matchesSearch =
+      product.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
+      product.id.toString().includes(searchTerm);
+
+    const matchesFilter =
+      filter === "Tüm Ürünler" ||
+      (filter === "Favoriler" && likedProducts.includes(product.id)) ||
+      (filter === "Sepet" && cartProducts.includes(product.id));
+
+    return matchesSearch && matchesFilter;
+  });
   return (
     <div>
       <header className="header">
@@ -54,6 +74,13 @@ useEffect(() => {
       <main>
 
         <label htmlFor="product-search">Ürün Ara</label>
+        <select value={filter}
+          onChange={(e) => setFilter(e.target.value)}
+        >
+          <option>Tüm Ürünler</option>
+          <option>Favoriler</option>
+          <option>Sepet</option>
+        </select>
 
         <input
           id="product-search"
@@ -85,7 +112,7 @@ useEffect(() => {
               <p className="product-price">{product.price} TL</p>
 
               <button
-                className="like-btn"
+                className={`like-btn ${likedProducts.includes(product.id) ? "liked" : ""}`}
                 onClick={(e) => {
                   e.stopPropagation();
 
@@ -97,6 +124,20 @@ useEffect(() => {
                 }}
               >
                 {likedProducts.includes(product.id) ? "♥" : "♡"}
+              </button>
+              <button
+                className={`cart-btn ${cartProducts.includes(product.id) ? "added" : ""}`}
+                onClick={(e) => {
+                  e.stopPropagation();
+
+                  setCartProducts((prev) =>
+                    prev.includes(product.id)
+                      ? prev.filter((id) => id !== product.id)
+                      : [...prev, product.id]
+                  );
+                }}
+              >
+                +
               </button>
             </article>
           ))}

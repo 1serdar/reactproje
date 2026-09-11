@@ -8,7 +8,7 @@ import ProtectedRoute from "./ProtectedRoute";
 function App() {
   useEffect(() => {
     if (window.location.pathname === "/reactproje/") {
-      document.title = "ACS - Giriş";
+      document.title = "ACS";
 
       const description = document.querySelector('meta[name="description"]');
       if (description) {
@@ -23,11 +23,9 @@ function App() {
   const [activeTab, setActiveTab] = useState("login");
   const [showPassword, setShowPassword] = useState(false);
 
-  /*
-  useEffect(() => {
+  /*useEffect(() => { // aktif sekme, console yazdırma
     console.log("Aktif sekme:", activeTab);
-  }, [activeTab]);
-  */
+  }, [activeTab]);*/
 
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -43,15 +41,29 @@ function App() {
   const staticPassword = "123456";
 
   const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [currentUser, setCurrentUser] = useState("");
 
-  const handleLogin = () => {
-    if (email === staticEmail && password === staticPassword) {
+  const handleLogin = () => { // Kullanıcı giriş kontrolü
+    setMessage("");
+    setMessageType("");
+    if (!email.trim() || !password.trim()) {
+      setMessage("Lütfen tüm alanları doldurunuz!");
+      setMessageType("error");
+      return;
+    }
+    const users = JSON.parse(localStorage.getItem("users")) || [];
+
+    const registeredUser = users.find(
+      (user) => user.email === email && user.password === password
+    );
+    if (email.trim() === staticEmail && password === staticPassword || registeredUser) {
       console.log("Giriş başarılı!");
-      setIsLoggedIn(true);
       setMessage("Giriş başarılı!");
       setMessageType("success");
 
       setTimeout(() => {
+        setCurrentUser(registeredUser ? registeredUser.email : staticEmail);
+        setIsLoggedIn(true);
         navigate("/homepage", { replace: true });
       }, 1100);
     } else {
@@ -60,8 +72,49 @@ function App() {
       setMessageType("error");
     }
   };
+  const handleRegister = () => { // Kullanıcı kayıt kontrolü
+    setMessage("");
+    setMessageType("");
+    if (!name.trim() || !registerEmail.trim() || !registerPassword.trim()) {
+      setMessage("Lütfen tüm alanları doldurunuz!");
+      setMessageType("error");
+      return;
+    }
+    const emailRegex = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9]+\.[a-zA-Z0-9]+$/;
+    if (!emailRegex.test(registerEmail)) {
+      setMessage("Geçerli bir e-posta adresi giriniz!");
+      setMessageType("error");
+      return;
+    }
 
-  const handleTabChange = (tab) => {
+    const passwordRegex = /^(?=.*[!@#$%^&*()_+\-=\[\]{};':"\\|,.<>/?]).{4,}$/;
+    if (!passwordRegex.test(registerPassword)) {
+      setMessage("Şifre en az 4 karakter, 1 özel karakter içermeli!");
+      setMessageType("error");
+      return;
+    }
+    const users = JSON.parse(localStorage.getItem("users")) || [];
+    const existingUser = users.find(
+      (user) => user.email === registerEmail
+    );
+
+    if (existingUser) {
+      setMessage("Bu e-posta adresi zaten kayıtlı!");
+      setMessageType("error");
+      return;
+    }
+    users.push({
+      name: name.trim(),
+      email: registerEmail.trim(),
+      password: registerPassword.trim()
+    });
+
+    localStorage.setItem("users", JSON.stringify(users));
+    setMessage("Üyelik başarıyla oluşturuldu!");
+    setMessageType("success");
+    console.log("Kayıt başarılı!");
+  };
+  const handleTabChange = (tab) => { // Giriş Yap/Üye Ol işlemleri
     setActiveTab(tab);
 
     setEmail("");
@@ -77,7 +130,7 @@ function App() {
     setShowPassword(false);
   };
 
-  const handleLogout = () => {
+  const handleLogout = () => { // Çıkış işlemleri
     setEmail("");
     setPassword("");
     setName("");
@@ -88,8 +141,10 @@ function App() {
     setActiveTab("login");
     setShowPassword(false);
     setIsLoggedIn(false);
+    setCurrentUser("");
     document.title = "ACS";
     navigate("/", { replace: true });
+    console.log("Çıkış başarılı!");
   };
 
   return (
@@ -100,7 +155,7 @@ function App() {
           isLoggedIn ? (
             <Navigate to="/homepage" replace />
           ) : (
-            <div className="container">
+            <main className="container">
               <div className="login-box">
 
                 <div className="tabs">
@@ -123,17 +178,19 @@ function App() {
                   <>
                     <h2>Hesabınıza Giriş Yapın</h2>
 
+                    <label>E-Posta Adresi</label>
                     <input
                       type="email"
-                      placeholder="E-posta Adresi"
+                      placeholder="E-Posta Adresi"
                       value={email}
                       onChange={(e) => setEmail(e.target.value)}
                     />
-
+                    <label>Şifre</label>
                     <div className="password-box">
+
                       <input
                         type={showPassword ? "text" : "password"}
-                        placeholder="Şifre"
+                        placeholder="Şifrenizi girin"
                         value={password}
                         onChange={(e) => setPassword(e.target.value)}
                       />
@@ -162,26 +219,26 @@ function App() {
                   </>
                 ) : (
                   <>
-                    <h2>Yeni Üyelik</h2>
-
+                    <h2>Hesap Oluşturun</h2>
+                    <label>Ad Soyad</label>
                     <input
                       type="text"
-                      placeholder="Ad Soyad"
+                      placeholder="Adınız ve Soyadınız"
                       value={name}
                       onChange={(e) => setName(e.target.value)}
                     />
-
+                    <label>E-Posta Adresi</label>
                     <input
                       type="email"
-                      placeholder="E-posta Adresi"
+                      placeholder="ornek@mail.com"
                       value={registerEmail}
                       onChange={(e) => setRegisterEmail(e.target.value)}
                     />
-
+                    <label>Şifre</label>
                     <div className="password-box">
                       <input
                         type={showPassword ? "text" : "password"}
-                        placeholder="Şifre"
+                        placeholder="Şifrenizi oluşturun"
                         value={registerPassword}
                         onChange={(e) => setRegisterPassword(e.target.value)}
                       />
@@ -195,7 +252,13 @@ function App() {
                       </button>
                     </div>
 
-                    <button className="login-btn">
+                    {message && (
+                      <div className={`message ${messageType}`}>
+                        {message}
+                      </div>
+                    )}
+
+                    <button className="login-btn" onClick={handleRegister}>
                       Üye Ol
                     </button>
                   </>
@@ -207,16 +270,14 @@ function App() {
                 © 2026 ACS - Tüm Hakları Saklıdır.
               </footer>
 
-            </div>
+            </main>
           )}
       />
       <Route
         path="/homepage"
         element={
           <ProtectedRoute isLoggedIn={isLoggedIn}>
-            <Home
-              onLogout={handleLogout}
-            />
+            <Home onLogout={handleLogout} currentUser={currentUser} />
           </ProtectedRoute>
         }
       />
@@ -225,7 +286,7 @@ function App() {
         path="/productdetail/:id"
         element={
           <ProtectedRoute isLoggedIn={isLoggedIn}>
-            <ProductDetail onLogout={handleLogout} />
+            <ProductDetail onLogout={handleLogout} currentUser={currentUser} />
           </ProtectedRoute>
         }
       />

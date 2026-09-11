@@ -57,7 +57,7 @@
 }
 
 .products-section {
-     margin-top: -15px;
+    margin-top: -15px;
     padding: 20px 40px;
     display: grid;
     grid-template-columns: repeat(4, minmax(200px, 1fr));
@@ -108,7 +108,7 @@
     padding-left: 15px;
 }
 
-main > label {
+main>label {
     display: block;
     margin-top: 10px;
     margin-left: 15px;
@@ -128,7 +128,50 @@ main > label {
     line-height: 32px;
     padding: 0;
     cursor: pointer;
+    color: black;
+}
+
+.like-btn.liked {
     color: red;
+}
+
+.cart-btn {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    width: 32px;
+    height: 32px;
+    border: none;
+    background: white;
+    border-radius: 50%;
+    font-size: 22px;
+    cursor: pointer;
+    color: black;
+}
+
+.cart-btn.added {
+    color: #1ed760;
+}
+
+main {
+    position: relative;
+}
+
+main>select {
+    position: absolute;
+    top: 10px;
+    right: 15px;
+}
+
+main>label {
+    display: inline-block;
+    margin-top: 10px;
+    margin-left: 15px;
+    margin-bottom: 5px;
+}
+
+main>select {
+    margin-left: calc(100% - 150px);
 }
 
 @media (max-width: 500px) {

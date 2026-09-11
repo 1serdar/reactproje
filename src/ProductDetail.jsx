@@ -4,7 +4,7 @@ import { useNavigate, useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
 import products from "./mockData";
 
-function ProductDetail({ onLogout }) {
+function ProductDetail({ onLogout, currentUser }) {
     useEffect(() => {
         document.title = "ACS - Ürün Detayı";
 
@@ -18,12 +18,22 @@ function ProductDetail({ onLogout }) {
     }, []);
     const navigate = useNavigate();
     const { id } = useParams();
-    const [isLiked, setIsLiked] = useState(() => {
-    const savedLikes = localStorage.getItem("likedProducts");
-    const likedProducts = savedLikes ? JSON.parse(savedLikes) : [];
 
-    return likedProducts.includes(Number(id));
-});
+    // Kullanıcıya özel favori ve sepet
+    const [isLiked, setIsLiked] = useState(() => {
+        const savedLikes = localStorage.getItem(`likedProducts_${currentUser}`);
+        const likedProducts = savedLikes ? JSON.parse(savedLikes) : [];
+
+        return likedProducts.includes(Number(id));
+    });
+    const [isInCart, setIsInCart] = useState(() => {
+        const savedCart = localStorage.getItem(`cartProducts_${currentUser}`);
+        const cartProducts = savedCart ? JSON.parse(savedCart) : [];
+
+        return cartProducts.includes(Number(id));
+    });
+
+    // Ürün detay bilgileri
     const selectedProduct = products.find(
         (product) => product.id === Number(id)
     );
@@ -68,27 +78,50 @@ function ProductDetail({ onLogout }) {
                 </section>
 
                 <button
-                    className="like-btn"
+                    className={`like-btn ${isLiked ? "liked" : ""}`}
                     onClick={() => {
-    const savedLikes = localStorage.getItem("likedProducts");
-    const likedProducts = savedLikes ? JSON.parse(savedLikes) : [];
+                        const savedLikes = localStorage.getItem(`likedProducts_${currentUser}`);
+                        const likedProducts = savedLikes ? JSON.parse(savedLikes) : [];
 
-    if (likedProducts.includes(Number(id))) {
-        const updatedLikes = likedProducts.filter(
-            (productId) => productId !== Number(id)
-        );
+                        if (likedProducts.includes(Number(id))) {
+                            const updatedLikes = likedProducts.filter(
+                                (productId) => productId !== Number(id)
+                            );
 
-        localStorage.setItem("likedProducts", JSON.stringify(updatedLikes));
-        setIsLiked(false);
-    } else {
-        const updatedLikes = [...likedProducts, Number(id)];
+                            localStorage.setItem(`likedProducts_${currentUser}`, JSON.stringify(updatedLikes));
+                            setIsLiked(false);
+                        } else {
+                            const updatedLikes = [...likedProducts, Number(id)];
 
-        localStorage.setItem("likedProducts", JSON.stringify(updatedLikes));
-        setIsLiked(true);
-    }
-}}
+                            localStorage.setItem(`likedProducts_${currentUser}`, JSON.stringify(updatedLikes));
+                            setIsLiked(true);
+                        }
+                    }}
                 >
                     {isLiked ? "♥" : "♡"}
+                </button>
+                <button
+                    className={`cart-btn ${isInCart ? "added" : ""}`}
+                    onClick={() => {
+                        const savedCart = localStorage.getItem(`cartProducts_${currentUser}`);
+                        const cartProducts = savedCart ? JSON.parse(savedCart) : [];
+
+                        if (cartProducts.includes(Number(id))) {
+                            const updatedCart = cartProducts.filter(
+                                (productId) => productId !== Number(id)
+                            );
+
+                            localStorage.setItem(`cartProducts_${currentUser}`, JSON.stringify(updatedCart));
+                            setIsInCart(false);
+                        } else {
+                            const updatedCart = [...cartProducts, Number(id)];
+
+                            localStorage.setItem(`cartProducts_${currentUser}`, JSON.stringify(updatedCart));
+                            setIsInCart(true);
+                        }
+                    }}
+                >
+                    +
                 </button>
             </main>
 

@@ -90,6 +90,22 @@
     position: absolute;
     top: 10px;
     left: 10px;
+    color: black;
+}
+
+.product-detail .cart-btn {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    color: black;
+}
+
+.product-detail .like-btn.liked {
+    color: red;
+}
+
+.product-detail .cart-btn.added {
+    color: #1ed760;
 }
 
 @media (max-width: 750px) {
