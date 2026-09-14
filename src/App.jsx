@@ -23,10 +23,6 @@ function App() {
   const [activeTab, setActiveTab] = useState("login");
   const [showPassword, setShowPassword] = useState(false);
 
-  /*useEffect(() => { // aktif sekme, console yazdırma
-    console.log("Aktif sekme:", activeTab);
-  }, [activeTab]);*/
-
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
@@ -38,7 +34,7 @@ function App() {
   const [messageType, setMessageType] = useState("");
 
   const staticEmail = "test@test.com";
-  const staticPassword = "123456";
+  const staticPassword = "!123";
 
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [currentUser, setCurrentUser] = useState("");
