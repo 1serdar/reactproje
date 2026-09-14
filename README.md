@@ -1,16 +1,34 @@
-# React + Vite
+# ACS - Ayakkabı E-Ticaret Projesi
+ACS, React ve Vite kullanılarak geliştirilmiş basit bir ayakkabı e-ticaret frontend projesidir.
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+## Özellikler
+- Kullanıcı giriş ve kayıt işlemleri
+- Kullanıcı bilgilerinin LocalStorage üzerinde saklanması
+- Ürün listeleme
+- Ürün detay sayfası
+- Ürün arama ve filtreleme
+- Favorilere ürün ekleme/çıkarma
+- Sepete ürün ekleme/çıkarma
+- Kullanıcıya özel favori ve sepet verileri
+- Responsive tasarım
+- React Router ile sayfa yönlendirme
+- SEO ve Open Graph düzenlemeleri
+- GitHub Pages ile yayınlama
 
-Currently, two official plugins are available:
+## Kullanılan Teknolojiler
+- React
+- Vite
+- JavaScript
+- CSS
+- React Router
+- LocalStorage
+- Git & GitHub
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+## Proje Yapısı
+Proje frontend odaklı olarak geliştirilmiştir. Ürün verileri mock data üzerinden sağlanmakta ve kullanıcı, favori ve sepet bilgileri LocalStorage üzerinde tutulmaktadır.
 
-## React Compiler
+## Canlı Proje
+https://1serdar.github.io/reactproje/
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
-
-## Expanding the ESLint configuration
-
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+## Geliştirici
+Serdar Körekoğlu
